@@ -55,7 +55,7 @@ describe('Endpoints', () => {
         });
     });
 
-    describe.skip('login and register', () => {
+    // describe.skip('login and register', () => {
 
         describe('POST /register', () => {
             it('should send back success with token', async () => {
@@ -98,7 +98,7 @@ describe('Endpoints', () => {
                 expect(incorrectLoginResponse.text).toBe('Unauthorized');
             });
         });
-    });
+    // });
 
     describe('/kittens endpoints', () => {
         beforeEach(async () => {
