@@ -105,6 +105,7 @@ describe('Endpoints', () => {
             await sequelize.sync({ force: true }); // recreate db
             ({token, user} = await createTestUser(testUserData));
             kitten = await Kitten.create({...testKittenData, ownerId: user.id});
+            console.log(testKittenData)
         });
         describe('GET /kittens/:id', () => {
             it('should return a single cat', async () => {

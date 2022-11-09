@@ -107,14 +107,16 @@ app.get('/kittens/:id', setUser, async(req, res, next) => {
   const kitten = await Kitten.findByPk(req.params.id)
   
   if (!req.user) {
+    
     res.sendStatus(401)
     return 
   }
-  if (req.user.id != kitten.userId) {
+  if (req.user.id != kitten.ownerId) {
     res.sendStatus(401)
     return 
   }
-  res.send({kitten})
+  const {name, age, color} = kitten
+  res.send({name, age, color})
 })
 
 
@@ -140,11 +142,12 @@ app.delete('/kittens/:id', setUser, async(req, res, next) => {
     res.sendStatus(401)
     return 
   }
-  if (req.user.id != kitten.userId) {
+  if (req.user.id != kitten.ownerId) {
+    console.log(kitten.ownerId)
     res.sendStatus(401)
     return 
   }
-  await Kitten.delete({where: {id: kitten.id}})
+  await Kitten.destroy({where: {id: kitten.id}})
   res.sendStatus(204)
 })
 
